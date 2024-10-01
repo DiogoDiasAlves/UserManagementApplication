@@ -18,7 +18,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("v1/api/usuarios")
+    @PostMapping("/v1/api/usuarios")
     public ResponseEntity<Usuarios> salvar(@RequestBody Usuarios usuario){
         Usuarios usuarioSalvo = usuarioService.salvar(usuario);
         return ResponseEntity.status(201).body(usuarioSalvo);
@@ -28,23 +28,23 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
 
-    @GetMapping("v1/api/usuarios")
+    @GetMapping("/v1/api/usuarios")
     public ResponseEntity<List<Usuarios>> ListasUsuarios(){
         List<Usuarios> usuarioListar= usuarioRepository.findAll();
         return ResponseEntity.status(200).body(usuarioListar);
     }
-    @GetMapping("v1/api/usuarios/{id}")
+    @GetMapping("/v1/api/usuarios/id/{id}")
     public ResponseEntity<Optional<Usuarios>> buscaId(@PathVariable Long id){
         Optional<Usuarios> usuarioID = usuarioRepository.findById(id);
                 return ResponseEntity.status(200).body(usuarioID);
     }
 
-    @PutMapping("v1/api/usuarios/{id}")
+    @PutMapping("/v1/api/usuarios/{id}")
     public ResponseEntity<Usuarios> editar(@RequestBody Usuarios usuario){
         Usuarios usuarioSalvo = usuarioService.salvar(usuario);
         return ResponseEntity.status(201).body(usuarioSalvo);
     }
-    @DeleteMapping("v1/api/usuarios/{id}")
+    @DeleteMapping("/v1/api/usuarios/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         Optional<Usuarios> usuarioOptional = usuarioRepository.findById(id);
 
@@ -56,7 +56,10 @@ public class UsuarioController {
         }
     }
 
-
-
+    @GetMapping("/v1/api/usuarios/name/{name}")
+    public ResponseEntity<Optional<Usuarios>> buscaNome(@PathVariable String name){
+        Optional<Usuarios> usuarioNome = usuarioRepository.findByName(name);
+        return ResponseEntity.status(200).body(usuarioNome);
+    }
 
 }

@@ -16,7 +16,7 @@ public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+    private String name;
     @Column(unique = true)
     private String email;
     private String telefone;
